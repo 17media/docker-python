@@ -15,7 +15,8 @@ RUN             apk --no-cache add --virtual .build-deps \
                     build-base \
                     openssl-dev \
                     libffi-dev \
-                    zlib-dev && \
+                    zlib-dev \
+                    python3-dev && \
                 pip install --no-cache-dir --use-wheel \
                     pyOpenSSL==16.2.0 \
                     ndg-httpsclient==0.4.2 \

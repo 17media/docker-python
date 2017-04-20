@@ -41,7 +41,8 @@ ONBUILD RUN     apk --no-cache add --virtual .build-deps \
                     build-base \
                     openssl-dev \
                     libffi-dev \
-                    zlib-dev && \
+                    zlib-dev \
+                    python3-dev && \
                 cat requirements.build.txt 2> /dev/null | xargs -r apk --no-cache add --virtual .build-deps && \
                 pip-accel install -r requirements.txt && \
                 cat requirements.run.txt 2> /dev/null | xargs -r apk --no-cache add --virtual .run-deps && \
