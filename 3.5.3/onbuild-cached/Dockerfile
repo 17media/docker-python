@@ -4,6 +4,7 @@ MAINTAINER      Allan Lei<allanlei@helveticode.com>
 ENV             PYTHONUNBUFFERED True
 ENV             PIP_DISABLE_PIP_VERSION_CHECK on
 ENV             WORKDIR /usr/src/app/
+ENV             PIP_ACCEL_CACHE /root/.cache/pip-accel
 
 WORKDIR         $WORKDIR
 # ISSUE: https://github.com/gliderlabs/docker-alpine/issues/205
