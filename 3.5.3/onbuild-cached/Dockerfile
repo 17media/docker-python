@@ -17,8 +17,8 @@ RUN             apk --no-cache add --virtual .build-deps \
                     openssl-dev \
                     libffi-dev \
                     zlib-dev && \
-                pip install pip-accel==0.43 && \
-                pip-accel install \
+                pip install --no-cache-dir pip-accel==0.43  && \
+                pip install --no-cache-dir \
                     pyOpenSSL==16.2.0 \
                     ndg-httpsclient==0.4.2 \
                     pyasn1==0.2.2 \
@@ -59,5 +59,5 @@ ONBUILD RUN     apk --no-cache add --virtual .build-deps \
                     -o \( -type f -a -name '*.pyc' -o -name '*.pyo' \) \
                     -exec rm -rf '{}' + && \
                 find . -type d -name "__pycache__" -exec rm -rf '{}' + && \
-                rm -rf ~/.cache/*
+                rm -rf /root/.cache/*
 ONBUILD COPY    . $WORKDIR
