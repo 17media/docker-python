@@ -37,7 +37,7 @@ RUN             apk --no-cache add --virtual .build-deps \
 
 # ISSUE: https://github.com/docker/docker/issues/13045
 ONBUILD COPY    requirements*.txt $WORKDIR
-ONBUILD COPY    .cache/pip-accel $HOME/.cache/pip-accel
+ONBUILD COPY    .cache/pip-accel $PIP_ACCEL_CACHE
 ONBUILD RUN     apk --no-cache add --virtual .build-deps \
                     build-base \
                     openssl-dev \
