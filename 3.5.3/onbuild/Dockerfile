@@ -17,7 +17,7 @@ RUN             apk --no-cache add --virtual .build-deps \
                     libffi-dev \
                     zlib-dev \
                     python3-dev && \
-                pip install --no-cache-dir --use-wheel \
+                pip install --no-cache-dir --use-wheel -f https://github.com/17media/pip-wheelhouse/blob/master/index.html \
                     pyOpenSSL==16.2.0 \
                     ndg-httpsclient==0.4.2 \
                     pyasn1==0.2.2 \
@@ -43,7 +43,7 @@ ONBUILD RUN     apk --no-cache add --virtual .build-deps \
                     zlib-dev \
                     python3-dev && \
                 cat requirements.build.txt 2> /dev/null | xargs -r apk --no-cache add --virtual .build-deps && \
-                pip install --no-cache-dir --use-wheel -r requirements.txt && \
+                pip install --no-cache-dir --use-wheel -f https://github.com/17media/pip-wheelhouse/blob/master/index.html -r requirements.txt && \
                 cat requirements.run.txt 2> /dev/null | xargs -r apk --no-cache add --virtual .run-deps && \
                 scanelf --needed --nobanner --recursive /usr/local \
                     | awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
