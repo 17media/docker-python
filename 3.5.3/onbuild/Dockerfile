@@ -4,6 +4,7 @@ MAINTAINER      Allan Lei<allanlei@helveticode.com>
 ENV             PYTHONUNBUFFERED True
 ENV             PIP_DISABLE_PIP_VERSION_CHECK on
 ENV             WORKDIR /usr/src/app/
+ENV             PIP_FIND_LINKS https://17media.github.io/pip-wheelhouse/index.html
 
 WORKDIR         $WORKDIR
 # ISSUE: https://github.com/gliderlabs/docker-alpine/issues/205
@@ -17,7 +18,7 @@ RUN             apk --no-cache add --virtual .build-deps \
                     libffi-dev \
                     zlib-dev \
                     python3-dev && \
-                pip install --no-cache-dir --use-wheel -f https://17media.github.io/pip-wheelhouse/index.html \
+                pip install --no-cache-dir --use-wheel \
                     pyOpenSSL==16.2.0 \
                     ndg-httpsclient==0.4.2 \
                     pyasn1==0.2.2 \
@@ -43,7 +44,7 @@ ONBUILD RUN     apk --no-cache add --virtual .build-deps \
                     zlib-dev \
                     python3-dev && \
                 cat requirements.build.txt 2> /dev/null | xargs -r apk --no-cache add --virtual .build-deps && \
-                pip install --no-cache-dir --use-wheel -f https://17media.github.io/pip-wheelhouse/index.html -r requirements.txt && \
+                pip install --no-cache-dir --use-wheel -r requirements.txt && \
                 cat requirements.run.txt 2> /dev/null | xargs -r apk --no-cache add --virtual .run-deps && \
                 scanelf --needed --nobanner --recursive /usr/local \
                     | awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
