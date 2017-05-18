@@ -37,13 +37,12 @@ RUN             apk --no-cache add --virtual .build-deps \
 
 # ISSUE: https://github.com/docker/docker/issues/13045
 ONBUILD COPY    requirements*.txt $WORKDIR
-ONBUILD RUN     apk --no-cache add --virtual .build-deps \
+ONBUILD RUN     cat requirements.build.txt 2> /dev/null | xargs apk --no-cache add --virtual .build-deps \
                     build-base \
                     openssl-dev \
                     libffi-dev \
                     zlib-dev \
                     python3-dev && \
-                cat requirements.build.txt 2> /dev/null | xargs -r apk --no-cache add --virtual .build-deps && \
                 pip install --no-cache-dir --use-wheel -r requirements.txt && \
                 cat requirements.run.txt 2> /dev/null | xargs -r apk --no-cache add --virtual .run-deps && \
                 scanelf --needed --nobanner --recursive /usr/local \
